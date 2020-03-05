@@ -1,0 +1,44 @@
+.avatar { 
+    height: 50px;
+    border-radius: 50px;
+}
+
+.chat-message, .my-message{ 
+    display: flex;
+    margin: 30px 0px;
+}
+
+.conversation { 
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    margin-left: 10px;
+}
+
+.message {
+    background-color: #e9e9eb;
+    border-radius: 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: #000;
+    padding: 0px 5px;
+}
+
+.my-message { 
+    background-color: #1185f7;
+    border-radius: 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: #FFF;
+    position: absolute;
+    right: 0;
+    padding: 0px 5px;
+}
+
+.my-username, .my-avatar {
+    display: none;
+}

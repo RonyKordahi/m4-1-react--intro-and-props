@@ -102,6 +102,28 @@ function VideoPlayer(props) {
   );
 }
 ```
+```jsx
+function VideoPlayer(props) {
+  return (
+    <div>
+      <video
+        src={props.videoUrl}
+        width={props.width}
+        height={props.height}
+      />
+      <p>{props.description}</p>
+    </div>
+  );
+}
+VideoPlayer(PlayVideo);
+
+<PlayVideo
+  videoURL="http://youtube.com/some-video"
+  width={480}
+  height={300}
+  description="A cat playing a piano!"
+/>
+```
 
 ---
 
@@ -128,7 +150,30 @@ function Tweet(props) {
   );
 }
 ```
-
+```jsx
+//remade
+function Tweet(props) {
+  return (
+    <div>
+      <Avatar src={props.avatarURL} />
+      <div>
+        <p>
+          <span className="user-name">{props.userName}</span>
+          <span className="handle">{props.handle}</span>
+          <span className="date">{props.date}</span>
+        </p>
+        <p>{props.post}</p>
+        <div>
+          <button>Reply</button>
+          <button>Retweet</button>
+          <button>Like</button>
+          <button>Share</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
 ---
 
 ```jsx
@@ -145,7 +190,21 @@ function Header(props) {
   );
 }
 ```
+```jsx
+//remade
+function Header(props) {
+  return (
+    <header>
+      <h1>{props.title}</h1>
 
+      <nav>
+        <a href={props.nav.first.url}>{props.nav.first.label}</a>
+        <a href={props.nav.second.url}>{props.nav.second.url}</a>
+      </nav>
+    </header>
+  );
+}
+```
 ---
 
 ### Mapping over items
@@ -255,10 +314,32 @@ const pets = [
   </ul>
 </div>;
 ```
+```jsx
+//modified
+const pets = [
+  /* omitted */
+];
+
+<div>
+  <h1 className="title">My pets:</h1>
+  <ul>
+    {pets.map(pet => {
+        <PetInfo
+          name={pet.name}
+          age={pet.age}
+          species={pet.species}
+          breed={pet.breed}
+        >
+      })}
+    />
+  </ul>
+</div>;
+```
 
 ---
 
 ```jsx
+//skipped
 const forecasts = [4, -3, 1, 9, 4, 2, -6];
 
 <div>
@@ -287,6 +368,15 @@ const pizzaToppings = [
 <Pizza>
   <Topping name="green pepper" />
   <Topping name="broccoli" />
+</Pizza>
+```
+```jsx
+//modified
+<Pizza>
+  {//returns the entire topping object based on topping.isVegetarian being true
+    pizzaToppings.filter(topping => topping.isVegetarian) 
+    .map(topping => <Topping name={topping.name} />
+  )}
 </Pizza>
 ```
 

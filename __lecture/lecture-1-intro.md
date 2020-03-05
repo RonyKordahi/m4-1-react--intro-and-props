@@ -78,7 +78,7 @@ render(
 ### Compiling JSX to JS
 
 ```js
-// Before
+// Before (JSX)
 function GoButton(props) {
   return (
     <button className="btn" onClick={props.handleClick}>
@@ -87,7 +87,7 @@ function GoButton(props) {
   );
 }
 
-// After
+// After (JS)
 function GoButton(props) {
   return React.createElement(
     'button',
@@ -140,7 +140,7 @@ A _slot_ in which we can write JavaScript expressions.
 ```jsx
 let index = 0;
 
-<div id={'item-' + index} />;
+<div id={`item-${index}`} />;
 ```
 
 ---
@@ -154,6 +154,7 @@ render(
     There are {awakeStudents + asleepStudents} students in the class.
   </div>
 );
+//renders: "There are 10 students in the class."
 ```
 
 ---
@@ -171,15 +172,24 @@ render(
 Convert this JSX snippet to HTML:
 
 ```jsx
+//JS
 let birthdayCakeImage = '/images/cake.jpg';
 let age = 10;
 
+//JSX
 <div className="wrapper">
-  <img src={birthdayCakeImage} />
+  <img src={birthdayCakeImage} alt="cake" />
   <p>Happy {age}th birthday!</p>
 </div>;
 ```
 
+```html
+<!-- HTML -->
+<div class="wrapper">
+  <img src="/images/cake.jpg" alt="cake"/>
+  <p>Happy 10th birthday!</p>
+</div>
+```
 ---
 
 Convert this one too:
@@ -189,13 +199,23 @@ let agreeToTerms = false;
 
 <div>
   <label htmlFor="terms-of-service">
-    <input type="checkbox" id="terms-of-service" /> I agree to the terms
+    <input type="checkbox" id="terms-of-service" name="terms-of-services"/> I agree to the terms
   </label>
 
   {agreeToTerms && (
     <div>YOUR SOUL BELONGS TO ME MWAHAHAHAHAAAAAAHHHHHH!!!1</div>
   )}
 </div>;
+```
+```html
+<div>
+  <form for="terms-of-service" onaction="soul(event)">
+    <label for="terms-of-service">
+      <input type="checkbox" id="terms-of-service" name="terms-of-service" required/> I agree to the terms
+      <button type="submit" for="terms-of-service">Submit</button>
+    </label>
+  </form>
+</div>
 ```
 
 ---
@@ -264,6 +284,51 @@ const pets = [
 </div>;
 ```
 
+```html
+<div>
+  <h1 class="title">My pets:</h1>
+  <ul>
+    <li>
+      <h3>Bark Obama</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Age</th>
+            <th>Species</th>
+            <th>Breed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3</td>
+            <td>dog</td>
+            <td>labradoodle</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+    <li>
+      <h3>Chairman Meow</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Age</th>
+            <th>Species</th>
+            <th>Breed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>8</td>
+            <td>cat</td>
+            <td>ragdoll</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </ul>
+</div>
+```
 ---
 
 # Rendering
